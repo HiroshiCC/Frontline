@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class MyRobotController : MonoBehaviour {
 
-    private GameObject myCamera;
+	private float WALK = 5f;	// 歩くスピード
+	private float RUN = 15;		// 走るスピード
+	private float speed;
     private Rigidbody myRigidbody;
 
-    // Use this for initialization
-    void Start () {
-        myCamera = GameObject.Find("Main Camera");
+	//******************************************************************************************
+	//	Start
+	// [引数]
+	// [戻り値]
+	// [コメント]
+	//******************************************************************************************
+	void Start () {
         myRigidbody = GetComponent<Rigidbody>();
+		speed = WALK;
     }
 
-    // Update is called once per frame
-    void Update()
+	//******************************************************************************************
+	//	Update
+	// [引数]
+	// [戻り値]
+	// [コメント]
+	//******************************************************************************************
+	void Update()
     {
+		// PCでのデバッグ用
 
         // 左に向く
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -25,16 +38,24 @@ public class MyRobotController : MonoBehaviour {
         if (Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(0, 2, 0);
 
-		// 前進
+		// 速度の設定
+		if (Input.GetKey(KeyCode.S))
+			speed = RUN;					// 走る
+		else if (Input.GetKey(KeyCode.X))
+			speed = WALK;					// 歩く
+
+		// 前進・後退（キーを離したら停止）走って後退はできない
 		if (Input.GetKey(KeyCode.A))
-			myRigidbody.AddForce(transform.forward * 100f );
+			myRigidbody.velocity = transform.forward * speed;  // 前進
+		else if (Input.GetKey(KeyCode.Z))
+			myRigidbody.velocity = transform.forward * (-WALK);  // 後退
+		else
+			myRigidbody.velocity = new Vector3(0, 0, 0);        // 停止
 
+		// スマホタッチパネル用
+		//  ：
+		//  ：
+		//  ：
 
-		// 後退
-		if (Input.GetKey(KeyCode.Z))
-            myRigidbody.AddForce(-transform.forward * 100f );
-
-
-		// カメラの位置は、MyCameraController.csで処理
 	}
 }
