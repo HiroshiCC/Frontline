@@ -25,10 +25,13 @@ public class MyCameraController : MonoBehaviour {
 
 		// カメラのみ、上を向く
 		if (Input.GetKey(KeyCode.DownArrow))
-			transform.Rotate( new Vector3(-2, 0,0));
+			transform.Rotate( new Vector3(-1f, 0f,0f));
 
         // カメラのみ、下を向く
         if (Input.GetKey(KeyCode.UpArrow))
-			transform.Rotate( new Vector3(2, 0,0));
+			transform.Rotate( new Vector3(1f, 0f,0f));
 	}
+
+
+
 }

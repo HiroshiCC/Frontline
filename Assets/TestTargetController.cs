@@ -16,11 +16,4 @@ public class TestTargetController : MonoBehaviour
 	{
 
 	}
-
-	/* やっぱこれじゃない
-	void OnControllerColliderHit(ControllerColliderHit hit)
-	{
-		Debug.Log("Target");
-	}
-	*/
 }
