@@ -14,8 +14,10 @@ public class Weapon1Controller : MonoBehaviour {
 	//******************************************************************************************
 	void Start () {
 		RobotCamera = GameObject.Find("Main Camera");
-		//gameObject.transform.Rotate( new Vector3( RobotCamera.transform.eulerAngles.y, RobotCamera.transform.eulerAngles.z ) );
-		dir = RobotCamera.transform.forward;
+		dir = RobotCamera.transform.forward;	// <--ここにこれがないと、ホーミング弾になってしまう。
+
+		// 発射後 3秒で消す
+		Destroy(gameObject, 3.0f);
 	}
 
 	//******************************************************************************************
@@ -25,9 +27,7 @@ public class Weapon1Controller : MonoBehaviour {
 	// [コメント]
 	//******************************************************************************************
 	void Update () {
-		//transform.Translate( -60.0f*Time.deltaTime,0f,0f);
-		transform.Translate( dir * 60.0f * Time.deltaTime );
-		// 射程距離を計算し、Destroy()する。
+		transform.Translate(dir * 30.0f * Time.deltaTime);	// <-- これでは遅い。100.0fにしたいが、素通りしてしまう。
 	}
 
 	//******************************************************************************************
@@ -38,13 +38,26 @@ public class Weapon1Controller : MonoBehaviour {
 	//******************************************************************************************
 	void OnCollisionEnter(Collision other)
 	{
+		Debug.Log(other.gameObject.tag);  // <=== なぜ「Untagged」なのか！
+
+		// 発射直後、ランチャーに触れてしまうので、無視する。
+		//if (other.gameObject.tag == "tagLAUNCHER")
+		//{
+		//	Debug.Log("Launcher");
+		//	return;
+		//}
+
 		if (other.gameObject.tag == "tagTARGET")
 		{
 			Debug.Log("Hit!");
+			Destroy(gameObject);
 		}
 		else
+		{
 			Debug.Log("missA");
+			//Destroy(gameObject);
+		}
+		// どこかに衝突したらすぐに消す。
 
-		Destroy(gameObject);
 	}
 }

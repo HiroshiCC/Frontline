@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class MyRobotController : MonoBehaviour {
 
-	private float WALK = 5f;			// 歩くスピード
-	private float RUN = 15f;				// 走るスピード
+	private float WALK = 5.0f;			// 歩くスピード
+	private float RUN = 15.0f;				// 走るスピード
 	private float speed;                // 自機の移動速度
 	//private RaycastHit hit;				// Rayのヒット情報
-	private GameObject RobotCamera;
-	private GameObject RobotBody;
+	//private GameObject RobotCamera;
+	//private GameObject RobotBody;
 	private Rigidbody myRigidbody;
 	private float hdgSpeed;
 	private bool bulletFlag = false;
 	public GameObject weapon1Prefab;
-	//private Vector3 dir; 
+	private Vector3 dir;
+	private float sideOfFire = 1.0f;        // 1:右 2:左
+
+	private GameObject launcherL;
+	private GameObject launcherR;
+
 
 	//******************************************************************************************
 	//	Start
@@ -25,9 +30,12 @@ public class MyRobotController : MonoBehaviour {
 	void Start () {
 
         myRigidbody = GetComponent<Rigidbody>();
-		RobotCamera = GameObject.Find("Main Camera");
-		RobotBody = GameObject.Find("MyRobot");
+		//RobotCamera = GameObject.Find("Main Camera");
+		//RobotBody = GameObject.Find("MyRobot");
 		speed = WALK;
+
+		launcherL = GameObject.Find("LauncherL");
+		launcherR = GameObject.Find("LauncherR");
 	}
 
 
@@ -38,60 +46,51 @@ public class MyRobotController : MonoBehaviour {
 	// [コメント]
 	//******************************************************************************************
 	void Update()
-    {
+	{
 		// PCでのデバッグ用
 
 		// 移動スピードによって、旋回速度が変わる
-		if (speed == 0)
+		if (speed == 0.0f)
 			hdgSpeed = 1.0f;
 		else if (speed == WALK)
 			hdgSpeed = 0.6f;
 		else if (speed == RUN)
 			hdgSpeed = 0.3f;
 
-        // 左に向く
-        if (Input.GetKey(KeyCode.LeftArrow))
-             transform.Rotate(0, -hdgSpeed, 0);
- 
-        // 右に向く
-        if (Input.GetKey(KeyCode.RightArrow))
-            transform.Rotate(0, hdgSpeed, 0);
+		// for debug
+		hdgSpeed = 1.0f;
+
+		// 左に向く
+		if (Input.GetKey(KeyCode.LeftArrow))
+			transform.Rotate(0, -hdgSpeed, 0);
+
+		// 右に向く
+		if (Input.GetKey(KeyCode.RightArrow))
+			transform.Rotate(0, hdgSpeed, 0);
 
 		// 速度の設定
 		if (Input.GetKey(KeyCode.S))
-			speed = RUN;					// 走る
+			speed = RUN;                    // 走る
 		else if (Input.GetKey(KeyCode.X))
-			speed = WALK;					// 歩く
+			speed = WALK;                   // 歩く
+
+		// 縦方向の速度を保持する
+		Vector3 v = myRigidbody.velocity;
+		v.x = 0.0f;
+		v.z = 0.0f;
 
 		// 前進・後退（キーを離したら停止）走って後退はできない
 		if (Input.GetKey(KeyCode.A))
-			myRigidbody.velocity = transform.forward * speed;	// 前進
+			myRigidbody.velocity = transform.forward * speed;   // 前進
 		else if (Input.GetKey(KeyCode.Z))
-			myRigidbody.velocity = transform.forward * (-WALK);	// 後退
-		else
+			myRigidbody.velocity = transform.forward * (-WALK); // 後退
+		else {
 			myRigidbody.velocity = new Vector3(0, 0, 0);        // 停止
-
+		}
+		// 縦方向の速度を復元する
+		myRigidbody.velocity += v;
 
 		// 発射
-		/*
-		if (Input.GetKey(KeyCode.Space))
-		{
-			Debug.Log("shoot!");
-			// Rayを放つ。発射位置は自機の中心。方向はカメラの方向。距離300。
-			if (Physics.Raycast(transform.position, myCamera.transform.forward, out hit, 300f))
-			{
-				if (hit.collider.tag == "tagTARGET")
-				{
-					Debug.Log("Hit");
-					//Destroy(hit.rigidbody.gameObject);	// <-- ダメだった。gameObjectには何も入っていないらしい
-				}
-				else
-					Debug.Log("miss1"); // 山など、ターゲット以外の場合
-			}
-			else
-				Debug.Log("miss2");	// 空に向けて発射した場合
-		}
-		*/
 		// 実際に弾を飛ばすバージョン。連射はできないようにする。
 		if (Input.GetKey(KeyCode.Space))
 		{
@@ -99,20 +98,26 @@ public class MyRobotController : MonoBehaviour {
 			{
 				bulletFlag = true;
 				Debug.Log("Fire!");
-				//弾丸作成
-				//fir = RobotCamera.transform.forward;
 				GameObject weapon1 = Instantiate(weapon1Prefab) as GameObject;
-				weapon1.transform.position = new Vector3(RobotBody.transform.position.x-3, RobotBody.transform.position.y+2, RobotBody.transform.position.z);
+
+				//弾丸作成（左右のランチャから交互に発射する）
+				if (sideOfFire == 1)
+					weapon1.transform.position = launcherL.transform.position;
+				else if (sideOfFire == -1 )
+					weapon1.transform.position = launcherR.transform.position;
+				sideOfFire *= -1.0f;
 			}
 		}
 		else
 			bulletFlag = false;
-			
+
 
 		// スマホタッチパネル用
 		//  ：
 		//  ：
 		//  ：
-
+		
+		//dir = RobotCamera.transform.forward;
+		//Debug.Log("Hdg=" + dir);
 	}
 }
