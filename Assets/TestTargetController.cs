@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestTargetController : MonoBehaviour
 {
+	public GameObject ExplosionPrefab;
 
 	// Use this for initialization
 	void Start()
@@ -15,5 +16,15 @@ public class TestTargetController : MonoBehaviour
 	void Update()
 	{
 
+	}
+
+	void OnCollisionEnter(Collision other)
+	{
+		if ( (other.gameObject.tag == "tagCANON") || (other.gameObject.tag == "tagMISSILE") || (other.gameObject.tag == "tagMACHINEGUN") )
+		{
+			Destroy(gameObject);
+			GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
+			explosion.transform.position = transform.position;
+		}
 	}
 }

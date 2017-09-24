@@ -6,6 +6,10 @@ TagManager:
   tags:
   - tagTARGET
   - tagLAUNCHER
+  - tagGROUND
+  - tagCANON
+  - tagMISSILE
+  - tagMACHINEGUN
   layers:
   - Default
   - TransparentFX

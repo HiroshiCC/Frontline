@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Weapon1Controller : MonoBehaviour {
 
-	private GameObject RobotCamera;
-	private Vector3 dir;
+	private Rigidbody myRigidbody;
+	private float speed;			// 弾の速さ
+	private float periodOfLive;		// 弾の最大生存期間
+
 	//******************************************************************************************
 	//	Start
 	// [引数]
@@ -13,11 +15,33 @@ public class Weapon1Controller : MonoBehaviour {
 	// [コメント]
 	//******************************************************************************************
 	void Start () {
-		RobotCamera = GameObject.Find("Main Camera");
-		dir = RobotCamera.transform.forward;	// <--ここにこれがないと、ホーミング弾になってしまう。
+		myRigidbody = GetComponent<Rigidbody>();
+
+		/*
+		// 弾の速さをと生存期間の設定
+		if (myRigidbody.tag == "tagCANON")
+		{
+			speed = 150.0f;
+			periodOfLive = 2.5f;
+		}
+		else if (myRigidbody.tag == "tagMISSILE")
+		{
+			speed = 40.0f;
+			periodOfLive = 3.0f;
+		}
+		else if (myRigidbody.tag == "tagMACHINEGUN")
+		{
+			speed = 120.0f;
+			periodOfLive = 2.0f;
+		}
+		*/
+		speed = 140.0f;
+		periodOfLive = 0.75f;
+
+		myRigidbody.velocity = transform.forward * speed;
 
 		// 発射後 3秒で消す
-		Destroy(gameObject, 3.0f);
+		Destroy(gameObject, periodOfLive);
 	}
 
 	//******************************************************************************************
@@ -27,7 +51,6 @@ public class Weapon1Controller : MonoBehaviour {
 	// [コメント]
 	//******************************************************************************************
 	void Update () {
-		transform.Translate(dir * 30.0f * Time.deltaTime);	// <-- これでは遅い。100.0fにしたいが、素通りしてしまう。
 	}
 
 	//******************************************************************************************
@@ -38,26 +61,15 @@ public class Weapon1Controller : MonoBehaviour {
 	//******************************************************************************************
 	void OnCollisionEnter(Collision other)
 	{
-		Debug.Log(other.gameObject.tag);  // <=== なぜ「Untagged」なのか！
-
-		// 発射直後、ランチャーに触れてしまうので、無視する。
-		//if (other.gameObject.tag == "tagLAUNCHER")
-		//{
-		//	Debug.Log("Launcher");
-		//	return;
-		//}
-
 		if (other.gameObject.tag == "tagTARGET")
 		{
-			Debug.Log("Hit!");
+			// 標的に命中
 			Destroy(gameObject);
 		}
-		else
+		else if (other.gameObject.tag == "tagGROUND")
 		{
-			Debug.Log("missA");
-			//Destroy(gameObject);
+			// 地面に外れた
+			Destroy(gameObject);
 		}
-		// どこかに衝突したらすぐに消す。
-
 	}
 }
