@@ -6,7 +6,8 @@ public class Weapon1Controller : MonoBehaviour {
 
 	private Rigidbody myRigidbody;
 	private float speed;			// 弾の速さ
-	private float periodOfLive;		// 弾の最大生存期間
+	private float periodOfLive;     // 弾の最大生存期間
+	private AudioSource sound;
 
 	//******************************************************************************************
 	//	Start
@@ -16,6 +17,10 @@ public class Weapon1Controller : MonoBehaviour {
 	//******************************************************************************************
 	void Start () {
 		myRigidbody = GetComponent<Rigidbody>();
+
+		// 発射音を設定・再生
+		sound = GetComponent<AudioSource>();
+		sound.Play();
 
 		/*
 		// 弾の速さをと生存期間の設定

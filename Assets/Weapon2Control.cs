@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon2Control : MonoBehaviour {
 
 	private Rigidbody myRigidbody;
+	private AudioSource sound;
 
 	//******************************************************************************************
 	//	Start
@@ -13,8 +14,13 @@ public class Weapon2Control : MonoBehaviour {
 	// [コメント]
 	//******************************************************************************************
 	void Start () {
+		// 速度を設定
 		myRigidbody = GetComponent<Rigidbody>();
 		myRigidbody.velocity = transform.forward * 40.0f;
+
+		// 発射音を設定・再生
+		sound = GetComponent<AudioSource>();
+		sound.Play();
 
 		// 発射後 3秒で消す
 		Destroy(gameObject, 4.0f);
