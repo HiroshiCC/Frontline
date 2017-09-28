@@ -45,8 +45,8 @@ public class Weapon1Controller : MonoBehaviour {
 
 		myRigidbody.velocity = transform.forward * speed;
 
-		// 発射後 3秒で消す
-		Destroy(gameObject, periodOfLive);
+		// 発射後 0.75秒で消す
+		Destroy( gameObject, periodOfLive );
 	}
 
 	//******************************************************************************************

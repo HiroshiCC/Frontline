@@ -40,7 +40,7 @@ public class MyRobotController : MonoBehaviour {
 	//******************************************************************************************
 	void Start () {
 
-		weaponEnergy = 1000;
+		weaponEnergy = 100000;
 
 		weaponName = new []{ "GUN", "MSL", "M/G" };
 		myRigidbody = GetComponent<Rigidbody>();
@@ -106,9 +106,8 @@ public class MyRobotController : MonoBehaviour {
 		else if (Input.GetKey(KeyCode.Z))
 			myRigidbody.velocity = transform.forward * (-WALK); // 後退
 		else
-			myRigidbody.velocity = new Vector3(0, 0, 0);        // 停止
-																// 縦方向の速度を復元する
-		myRigidbody.velocity += v;
+			myRigidbody.velocity = new Vector3(0, 0, 0);        // 停止																
+		myRigidbody.velocity += v;								// 縦方向の速度を復元する
 
 		// 武器選択（チャタリング防止）
 		if (Input.GetKey(KeyCode.C)) {
@@ -139,7 +138,7 @@ public class MyRobotController : MonoBehaviour {
 						GameObject weapon1 = Instantiate(weapon1Prefab) as GameObject;
 						weapon1.transform.position = launcherR.transform.position;
 						weapon1.transform.rotation = myCamera.transform.rotation;
-						weaponEnergy -= 10;
+						weaponEnergy -= 10;		// 発射にW.Eが10を消費
 					}
 					break;
 				case 1:
@@ -152,7 +151,7 @@ public class MyRobotController : MonoBehaviour {
 						GameObject weapon2 = Instantiate(weapon2Prefab) as GameObject;
 						weapon2.transform.position = launcherL.transform.position;
 						weapon2.transform.rotation = myCamera.transform.rotation;
-						weaponEnergy -= 100 ;
+						weaponEnergy -= 100;    // 発射にW.Eが100を消費
 					}
 					break;
 				case 2:
@@ -168,7 +167,7 @@ public class MyRobotController : MonoBehaviour {
 							weapon3.transform.position = gunR.transform.position;
 						weapon3.transform.rotation = myCamera.transform.rotation;
 						gunSide *= -1;
-						weaponEnergy -= 1;
+						weaponEnergy -= 1;  // 発射にW.Eが1を消費
 					}
 					// 連射は0.15秒に1発
 					mgCount += Time.deltaTime;

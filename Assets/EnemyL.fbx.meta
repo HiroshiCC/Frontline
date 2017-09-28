@@ -1,0 +1,346 @@
+fileFormatVersion: 2
+guid: fab1eac1e105e444885fe4db81b38cbc
+timeCreated: 1506458202
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: CanonBodyL
+    100002: CanonBodyL 1
+    100004: CanonBodyL 2
+    100006: CanonBodyR
+    100008: CanonBodyR 1
+    100010: CanonBodyR 2
+    100012: CanonHeadL
+    100014: CanonHeadL 1
+    100016: CanonHeadL 2
+    100018: CanonHeadR
+    100020: CanonHeadR 1
+    100022: CanonHeadR 2
+    100024: CanonL
+    100026: CanonR
+    100028: CaterpillarL
+    100030: CaterpillarL 1
+    100032: CaterpillarL 2
+    100034: CaterpillarR
+    100036: CaterpillarR 1
+    100038: CaterpillarR 2
+    100040: CaterpillarStay
+    100042: CaterpillarStay 1
+    100044: CaterpillarStay 2
+    100046: //RootNode
+    100048: GunL
+    100050: GunL 1
+    100052: GunL 2
+    100054: GunR
+    100056: GunR 1
+    100058: GunR 2
+    100060: LauncherBodyL
+    100062: LauncherBodyL 1
+    100064: LauncherBodyL 2
+    100066: LauncherBodyR
+    100068: LauncherBodyR 1
+    100070: LauncherBodyR 2
+    100072: LauncherHeadL
+    100074: LauncherHeadL 1
+    100076: LauncherHeadL 2
+    100078: LauncherHeadR
+    100080: LauncherHeadR 1
+    100082: LauncherHeadR 2
+    100084: LauncherMainBody
+    100086: LauncherMainBody 1
+    100088: LauncherMainBody 2
+    100090: LauncherSubBody
+    100092: LauncherSubBody 1
+    100094: LauncherSubBody 2
+    100096: MissileLauncher
+    100098: Torso
+    100100: Torso 1
+    100102: Torso 2
+    100104: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8"
+    100106: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8 1"
+    100108: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8 2"
+    400000: CanonBodyL
+    400002: CanonBodyL 1
+    400004: CanonBodyL 2
+    400006: CanonBodyR
+    400008: CanonBodyR 1
+    400010: CanonBodyR 2
+    400012: CanonHeadL
+    400014: CanonHeadL 1
+    400016: CanonHeadL 2
+    400018: CanonHeadR
+    400020: CanonHeadR 1
+    400022: CanonHeadR 2
+    400024: CanonL
+    400026: CanonR
+    400028: CaterpillarL
+    400030: CaterpillarL 1
+    400032: CaterpillarL 2
+    400034: CaterpillarR
+    400036: CaterpillarR 1
+    400038: CaterpillarR 2
+    400040: CaterpillarStay
+    400042: CaterpillarStay 1
+    400044: CaterpillarStay 2
+    400046: //RootNode
+    400048: GunL
+    400050: GunL 1
+    400052: GunL 2
+    400054: GunR
+    400056: GunR 1
+    400058: GunR 2
+    400060: LauncherBodyL
+    400062: LauncherBodyL 1
+    400064: LauncherBodyL 2
+    400066: LauncherBodyR
+    400068: LauncherBodyR 1
+    400070: LauncherBodyR 2
+    400072: LauncherHeadL
+    400074: LauncherHeadL 1
+    400076: LauncherHeadL 2
+    400078: LauncherHeadR
+    400080: LauncherHeadR 1
+    400082: LauncherHeadR 2
+    400084: LauncherMainBody
+    400086: LauncherMainBody 1
+    400088: LauncherMainBody 2
+    400090: LauncherSubBody
+    400092: LauncherSubBody 1
+    400094: LauncherSubBody 2
+    400096: MissileLauncher
+    400098: Torso
+    400100: Torso 1
+    400102: Torso 2
+    400104: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8"
+    400106: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8 1"
+    400108: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8 2"
+    2300000: CanonBodyL
+    2300002: CanonBodyL 1
+    2300004: CanonBodyL 2
+    2300006: CanonBodyR
+    2300008: CanonBodyR 1
+    2300010: CanonBodyR 2
+    2300012: CanonHeadL
+    2300014: CanonHeadL 1
+    2300016: CanonHeadL 2
+    2300018: CanonHeadR
+    2300020: CanonHeadR 1
+    2300022: CanonHeadR 2
+    2300024: CaterpillarL
+    2300026: CaterpillarL 1
+    2300028: CaterpillarL 2
+    2300030: CaterpillarR
+    2300032: CaterpillarR 1
+    2300034: CaterpillarR 2
+    2300036: CaterpillarStay
+    2300038: CaterpillarStay 1
+    2300040: CaterpillarStay 2
+    2300042: GunL
+    2300044: GunL 1
+    2300046: GunL 2
+    2300048: GunR
+    2300050: GunR 1
+    2300052: GunR 2
+    2300054: LauncherBodyL
+    2300056: LauncherBodyL 1
+    2300058: LauncherBodyL 2
+    2300060: LauncherBodyR
+    2300062: LauncherBodyR 1
+    2300064: LauncherBodyR 2
+    2300066: LauncherHeadL
+    2300068: LauncherHeadL 1
+    2300070: LauncherHeadL 2
+    2300072: LauncherHeadR
+    2300074: LauncherHeadR 1
+    2300076: LauncherHeadR 2
+    2300078: LauncherMainBody
+    2300080: LauncherMainBody 1
+    2300082: LauncherMainBody 2
+    2300084: LauncherSubBody
+    2300086: LauncherSubBody 1
+    2300088: LauncherSubBody 2
+    2300090: Torso
+    2300092: Torso 1
+    2300094: Torso 2
+    2300096: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8"
+    2300098: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8 1"
+    2300100: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8 2"
+    3300000: CanonBodyL
+    3300002: CanonBodyL 1
+    3300004: CanonBodyL 2
+    3300006: CanonBodyR
+    3300008: CanonBodyR 1
+    3300010: CanonBodyR 2
+    3300012: CanonHeadL
+    3300014: CanonHeadL 1
+    3300016: CanonHeadL 2
+    3300018: CanonHeadR
+    3300020: CanonHeadR 1
+    3300022: CanonHeadR 2
+    3300024: CaterpillarL
+    3300026: CaterpillarL 1
+    3300028: CaterpillarL 2
+    3300030: CaterpillarR
+    3300032: CaterpillarR 1
+    3300034: CaterpillarR 2
+    3300036: CaterpillarStay
+    3300038: CaterpillarStay 1
+    3300040: CaterpillarStay 2
+    3300042: GunL
+    3300044: GunL 1
+    3300046: GunL 2
+    3300048: GunR
+    3300050: GunR 1
+    3300052: GunR 2
+    3300054: LauncherBodyL
+    3300056: LauncherBodyL 1
+    3300058: LauncherBodyL 2
+    3300060: LauncherBodyR
+    3300062: LauncherBodyR 1
+    3300064: LauncherBodyR 2
+    3300066: LauncherHeadL
+    3300068: LauncherHeadL 1
+    3300070: LauncherHeadL 2
+    3300072: LauncherHeadR
+    3300074: LauncherHeadR 1
+    3300076: LauncherHeadR 2
+    3300078: LauncherMainBody
+    3300080: LauncherMainBody 1
+    3300082: LauncherMainBody 2
+    3300084: LauncherSubBody
+    3300086: LauncherSubBody 1
+    3300088: LauncherSubBody 2
+    3300090: Torso
+    3300092: Torso 1
+    3300094: Torso 2
+    3300096: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8"
+    3300098: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8 1"
+    3300100: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8 2"
+    4300000: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8"
+    4300002: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8"
+    4300004: "\u30B3\u30C3\u30AF\u30D4\u30C3\u30C8"
+    4300006: GunL
+    4300008: GunL
+    4300010: GunL
+    4300012: GunR
+    4300014: GunR
+    4300016: GunR
+    4300018: CanonBodyL
+    4300020: CanonBodyL
+    4300022: CanonBodyL
+    4300024: CanonHeadL
+    4300026: CanonHeadL
+    4300028: CanonHeadL
+    4300030: CanonBodyR
+    4300032: CanonBodyR
+    4300034: CanonBodyR
+    4300036: CanonHeadR
+    4300038: CanonHeadR
+    4300040: CanonHeadR
+    4300042: Torso
+    4300044: Torso
+    4300046: Torso
+    4300048: CaterpillarStay
+    4300050: CaterpillarStay
+    4300052: CaterpillarStay
+    4300054: CaterpillarL
+    4300056: CaterpillarL
+    4300058: CaterpillarL
+    4300060: LauncherBodyL
+    4300062: LauncherBodyL
+    4300064: LauncherBodyL
+    4300066: LauncherBodyR
+    4300068: LauncherBodyR
+    4300070: LauncherBodyR
+    4300072: LauncherMainBody
+    4300074: LauncherMainBody
+    4300076: LauncherMainBody
+    4300078: LauncherSubBody
+    4300080: LauncherSubBody
+    4300082: LauncherSubBody
+    4300084: LauncherHeadR
+    4300086: LauncherHeadR
+    4300088: LauncherHeadR
+    4300090: LauncherHeadL
+    4300092: LauncherHeadL
+    4300094: LauncherHeadL
+    4300096: CaterpillarR
+    4300098: CaterpillarR
+    4300100: CaterpillarR
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -16,7 +16,7 @@ public class Weapon3Control : MonoBehaviour {
 		myRigidbody = GetComponent<Rigidbody>();
 		myRigidbody.velocity = transform.forward * 100.0f;
 
-		// 発射後 2秒で消す
+		// 発射後 0.5秒で消す
 		Destroy(gameObject, 0.5f);
 	}
 

@@ -227,7 +227,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &65172671408841610
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -348,3 +348,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7003588622569d344b099cff8c2fa6ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionPrefab: {fileID: 131164, guid: 3c5f4e32698bdb04eaed647f60310510, type: 2}

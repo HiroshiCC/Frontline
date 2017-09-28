@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Weapon2Control : MonoBehaviour {
 
+	public GameObject ExplosionPrefab;
+
 	private Rigidbody myRigidbody;
 	private AudioSource sound;
 
@@ -22,7 +24,7 @@ public class Weapon2Control : MonoBehaviour {
 		sound = GetComponent<AudioSource>();
 		sound.Play();
 
-		// 発射後 3秒で消す
+		// 発射後 4秒で消す
 		Destroy(gameObject, 4.0f);
 	}
 
@@ -54,6 +56,8 @@ public class Weapon2Control : MonoBehaviour {
 		{
 			Debug.Log("Ground");
 			Destroy(gameObject);
+			GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
+			explosion.transform.position = transform.position;
 		}
 	}
 }

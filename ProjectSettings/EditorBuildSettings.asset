@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/FrontLine.unity
+    guid: 5fe4dd28dfd228d4f828727977e6c544
+  - enabled: 1
+    path: Assets/Stage2.unity
+    guid: 606ea59fdc9c3f349ac86a9e5e0bef06
