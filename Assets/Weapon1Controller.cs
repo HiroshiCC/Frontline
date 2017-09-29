@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon1Controller : MonoBehaviour {
+public class Weapon1Controller : MonoBehaviour
+{
 
 	private Rigidbody myRigidbody;
-	private float speed;			// 弾の速さ
+	private float speed;            // 弾の速さ
 	private float periodOfLive;     // 弾の最大生存期間
 	private AudioSource sound;
 
@@ -15,7 +16,8 @@ public class Weapon1Controller : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Start () {
+	void Start()
+	{
 		myRigidbody = GetComponent<Rigidbody>();
 
 		// 発射音を設定・再生
@@ -55,7 +57,8 @@ public class Weapon1Controller : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Update () {
+	void Update()
+	{
 	}
 
 	//******************************************************************************************
@@ -63,18 +66,46 @@ public class Weapon1Controller : MonoBehaviour {
 	// [引数]
 	// [戻り値]
 	// [コメント]
+	//	ステージ１では、こちらを使う
 	//******************************************************************************************
-	void OnCollisionEnter(Collision other)
+	void OnCollisionEnter( Collision other )
 	{
-		if (other.gameObject.tag == "tagTARGET")
+		if ( other.gameObject.tag == "tagTARGET" )
 		{
 			// 標的に命中
-			Destroy(gameObject);
+			Destroy( gameObject );
 		}
-		else if (other.gameObject.tag == "tagGROUND")
+		else if ( other.gameObject.tag == "tagGROUND" )
 		{
 			// 地面に外れた
-			Destroy(gameObject);
+			Destroy( gameObject );
+		}
+	}
+
+	//******************************************************************************************
+	//	OnTriggerEnter
+	// [引数]
+	// [戻り値]
+	//	ステージ２では、こちらを使う
+	//******************************************************************************************
+	void OnTriggerEnter( Collider other )
+	{
+		if ( other.gameObject.tag == "tagGROUND" )
+		{
+			Destroy( gameObject );
+		}
+		else if ( other.gameObject.tag == "tagEnemyS" )
+		{
+			Destroy( gameObject );
+		}
+		else if ( other.gameObject.tag == "tagEnemyM" )
+		{
+			Destroy( gameObject );
+			// ここで、相手を爆発させる
+		}
+		else if ( other.gameObject.tag == "tagEnemyL" )
+		{
+			Destroy( gameObject );
 		}
 	}
 }

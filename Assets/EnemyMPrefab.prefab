@@ -579,13 +579,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4537193720324272}
   - component: {fileID: 95260958227583912}
-  - component: {fileID: 54360842705935308}
   - component: {fileID: 65471162118013008}
   - component: {fileID: 114520362836270600}
   - component: {fileID: 195049515741856184}
   m_Layer: 0
   m_Name: EnemyMPrefab
-  m_TagString: Untagged
+  m_TagString: tagEnemyM
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3042,21 +3041,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1471534897532742}
   m_Mesh: {fileID: 4300006, guid: 546db42e57bab5a41aba23f35e2bf4d1, type: 3}
---- !u!54 &54360842705935308
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1631020930412450}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
 --- !u!65 &65471162118013008
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3064,7 +3048,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1631020930412450}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.7, y: 1.8, z: 2.8}
@@ -3107,8 +3091,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1631020930412450}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
+  m_Radius: 3
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -3116,7 +3100,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 3
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

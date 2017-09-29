@@ -7,6 +7,7 @@ public class MyCameraController : MonoBehaviour {
 	float maxAngle = 30;    // 最大回転角度
 	float minAngle = -45;   // 最小回転角度
 	float speed = 1.0f;     // 回転スピード
+	int pithCount;
 
 	//******************************************************************************************
 	//	Start
@@ -29,14 +30,15 @@ public class MyCameraController : MonoBehaviour {
 		// カメラのみ、上を向く
 		if ( Input.GetKey( KeyCode.DownArrow ) )
 		{
-			transform.Rotate( new Vector3( -1f, 0f, 0f ) );
+			transform.Rotate( new Vector3( -50.0f * Time.deltaTime, 0.0f, 0.0f ) );
 			//PitchLimit();
+
 		}
 
 		// カメラのみ、下を向く
 		if ( Input.GetKey( KeyCode.UpArrow ) )
 		{
-			transform.Rotate( new Vector3( 1f, 0f, 0f ) );
+			transform.Rotate( new Vector3( 50.0f * Time.deltaTime, 0.0f, 0.0f ) );
 			//PitchLimit();
 		}
 	}

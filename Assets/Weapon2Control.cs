@@ -43,6 +43,7 @@ public class Weapon2Control : MonoBehaviour {
 	// [引数]
 	// [戻り値]
 	// [コメント]
+	//	ステージ１では、こちらを使う
 	//******************************************************************************************
 	void OnCollisionEnter(Collision other)
 	{
@@ -58,6 +59,32 @@ public class Weapon2Control : MonoBehaviour {
 			Destroy(gameObject);
 			GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
 			explosion.transform.position = transform.position;
+		}
+	}
+
+	//******************************************************************************************
+	//	OnTriggerEnter
+	// [引数]
+	// [戻り値]
+	//	ステージ２では、こちらを使う
+	//******************************************************************************************
+	void OnTriggerEnter( Collider other )
+	{
+		if ( other.gameObject.tag == "tagGROUND" )
+		{
+			Destroy( gameObject );
+		}
+		else if ( other.gameObject.tag == "tagEnemyS" )
+		{
+			Destroy( gameObject );
+		}
+		else if ( other.gameObject.tag == "tagEnemyM" )
+		{
+			Destroy( gameObject );
+		}
+		else if ( other.gameObject.tag == "tagEnemyL" )
+		{
+			Destroy( gameObject );
 		}
 	}
 }

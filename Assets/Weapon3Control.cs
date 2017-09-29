@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon3Control : MonoBehaviour {
 
 	private Rigidbody myRigidbody;
+	private AudioSource sound;
 
 	//******************************************************************************************
 	//	Start
@@ -16,6 +17,10 @@ public class Weapon3Control : MonoBehaviour {
 		myRigidbody = GetComponent<Rigidbody>();
 		myRigidbody.velocity = transform.forward * 100.0f;
 
+		// 発射音を設定・再生
+		sound = GetComponent<AudioSource>();
+		sound.Play();
+		
 		// 発射後 0.5秒で消す
 		Destroy(gameObject, 0.5f);
 	}
@@ -41,13 +46,38 @@ public class Weapon3Control : MonoBehaviour {
 
 		if (other.gameObject.tag == "tagTARGET")
 		{
-			Debug.Log("Hit!");
 			Destroy(gameObject);
 		}
 		else if (other.gameObject.tag == "tagGROUND")
 		{
-			Debug.Log("Ground");
 			Destroy(gameObject);
+		}
+	}
+
+	//******************************************************************************************
+	//	OnTriggerEnter
+	// [引数]
+	// [戻り値]
+	//	ステージ２では、こちらを使う
+	//******************************************************************************************
+	void OnTriggerEnter( Collider other )
+	{
+		if ( other.gameObject.tag == "tagGROUND" )
+		{
+			Destroy( gameObject );
+		}
+		else if ( other.gameObject.tag == "tagEnemyS" )
+		{
+			Destroy( gameObject );
+		}
+		else if ( other.gameObject.tag == "tagEnemyM" )
+		{
+			Destroy( gameObject );
+			// ここで、相手を爆発させる
+		}
+		else if ( other.gameObject.tag == "tagEnemyL" )
+		{
+			Destroy( gameObject );
 		}
 	}
 }

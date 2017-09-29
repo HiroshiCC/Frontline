@@ -72,22 +72,19 @@ public class MyRobotController : MonoBehaviour {
 
 		// 移動スピードによって、旋回速度が変わる
 		if (speed == 0.0f)
-			hdgSpeed = 1.0f;
+			hdgSpeed = 100.0f;
 		else if (speed == WALK)
-			hdgSpeed = 0.6f;
+			hdgSpeed = 60.0f;
 		else if (speed == RUN)
-			hdgSpeed = 0.3f;
-
-		// for debug
-		hdgSpeed = 1.0f;
+			hdgSpeed = 30.0f;
 
 		// 左に向く
 		if (Input.GetKey(KeyCode.LeftArrow))
-			transform.Rotate(0, -hdgSpeed, 0);
+			transform.Rotate(0, -hdgSpeed * Time.deltaTime, 0);
 
 		// 右に向く
 		if (Input.GetKey(KeyCode.RightArrow))
-			transform.Rotate(0, hdgSpeed, 0);
+			transform.Rotate(0, hdgSpeed * Time.deltaTime, 0);
 
 		// 速度の設定
 		if (Input.GetKey(KeyCode.S))
