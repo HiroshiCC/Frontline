@@ -15,7 +15,9 @@ public class Weapon2Control : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Start () {
+	void Start ()
+	{
+
 		// 速度を設定
 		myRigidbody = GetComponent<Rigidbody>();
 		myRigidbody.velocity = transform.forward * 40.0f;
@@ -25,7 +27,7 @@ public class Weapon2Control : MonoBehaviour {
 		sound.Play();
 
 		// 発射後 4秒で消す
-		Destroy(gameObject, 4.0f);
+		Destroy( gameObject, 4.0f);
 	}
 
 	//******************************************************************************************
@@ -34,7 +36,8 @@ public class Weapon2Control : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Update () {
+	void Update ()
+	{
 		
 	}
 
@@ -50,15 +53,14 @@ public class Weapon2Control : MonoBehaviour {
 
 		if (other.gameObject.tag == "tagTARGET")
 		{
-			Debug.Log("Hit!");
 			Destroy(gameObject);
 		}
 		else if (other.gameObject.tag == "tagGROUND")
 		{
-			Debug.Log("Ground");
-			Destroy(gameObject);
 			GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
 			explosion.transform.position = transform.position;
+
+			Destroy( gameObject );
 		}
 	}
 
@@ -70,11 +72,7 @@ public class Weapon2Control : MonoBehaviour {
 	//******************************************************************************************
 	void OnTriggerEnter( Collider other )
 	{
-		if ( other.gameObject.tag == "tagGROUND" )
-		{
-			Destroy( gameObject );
-		}
-		else if ( other.gameObject.tag == "tagEnemyS" )
+		if ( other.gameObject.tag == "tagEnemyS" )
 		{
 			Destroy( gameObject );
 		}

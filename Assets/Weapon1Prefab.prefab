@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54441196851862808}
   - component: {fileID: 114508180632776214}
   - component: {fileID: 82297764007208456}
+  - component: {fileID: 114283579073316944}
   m_Layer: 0
   m_Name: Weapon1Prefab
   m_TagString: tagCANON
@@ -179,6 +180,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114283579073316944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828323943672910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f1f607a9fec5d4d82f275e26960559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 0}
 --- !u!114 &114508180632776214
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6893476a60f3585459976ce40659fd41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionPrefab: {fileID: 131164, guid: 3c5f4e32698bdb04eaed647f60310510, type: 2}
 --- !u!135 &135195575777196726
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Weapon1Controller : MonoBehaviour
 {
+	public GameObject ExplosionPrefab;
 
 	private Rigidbody myRigidbody;
 	private float speed;            // 弾の速さ
 	private float periodOfLive;     // 弾の最大生存期間
 	private AudioSource sound;
+	//private GameObject myCamera;
 
 	//******************************************************************************************
 	//	Start
@@ -19,36 +21,25 @@ public class Weapon1Controller : MonoBehaviour
 	void Start()
 	{
 		myRigidbody = GetComponent<Rigidbody>();
+		//myCamera = GameObject.Find( "Main Camera" );
+		//RaycastHit hit;
 
 		// 発射音を設定・再生
 		sound = GetComponent<AudioSource>();
 		sound.Play();
 
-		/*
-		// 弾の速さをと生存期間の設定
-		if (myRigidbody.tag == "tagCANON")
-		{
-			speed = 150.0f;
-			periodOfLive = 2.5f;
-		}
-		else if (myRigidbody.tag == "tagMISSILE")
-		{
-			speed = 40.0f;
-			periodOfLive = 3.0f;
-		}
-		else if (myRigidbody.tag == "tagMACHINEGUN")
-		{
-			speed = 120.0f;
-			periodOfLive = 2.0f;
-		}
-		*/
-		speed = 140.0f;
-		periodOfLive = 0.75f;
+		//// 照準の中央に向かって弾を発射するようにする
+		//// カメラの方向にRayを放つ
+		//if ( Physics.Raycast( transform.position, myCamera.transform.forward, out hit, 300f ) )
+		//{
+		//	//発射地点から、カメラのRay方向に向かって、弾を進める
+		//}
+		
 
-		myRigidbody.velocity = transform.forward * speed;
+		myRigidbody.velocity = transform.forward * 140.0f;
 
 		// 発射後 0.75秒で消す
-		Destroy( gameObject, periodOfLive );
+		Destroy( gameObject, 0.75f );
 	}
 
 	//******************************************************************************************
@@ -79,6 +70,8 @@ public class Weapon1Controller : MonoBehaviour
 		{
 			// 地面に外れた
 			Destroy( gameObject );
+			GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
+			explosion.transform.position = transform.position;
 		}
 	}
 
@@ -90,11 +83,7 @@ public class Weapon1Controller : MonoBehaviour
 	//******************************************************************************************
 	void OnTriggerEnter( Collider other )
 	{
-		if ( other.gameObject.tag == "tagGROUND" )
-		{
-			Destroy( gameObject );
-		}
-		else if ( other.gameObject.tag == "tagEnemyS" )
+		if ( other.gameObject.tag == "tagEnemyS" )
 		{
 			Destroy( gameObject );
 		}

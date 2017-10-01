@@ -15,7 +15,8 @@ public class EnemyLController : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Start () {
+	void Start ()
+	{
 		agent = GetComponent<NavMeshAgent>();
 
 		target.transform.Translate( 0.0f, 0.0f, 0.0f );
@@ -27,7 +28,8 @@ public class EnemyLController : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Update () {
+	void Update ()
+	{
 		agent.SetDestination( target.position );
 	}
 

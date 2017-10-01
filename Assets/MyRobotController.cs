@@ -38,7 +38,8 @@ public class MyRobotController : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Start () {
+	void Start ()
+	{
 
 		weaponEnergy = 100000;
 
@@ -126,9 +127,9 @@ public class MyRobotController : MonoBehaviour {
 			switch (kindOfWeapon)
 			{
 				case 0:
-					if (weaponEnergy < 10)
-						break;
 					// キャノン砲（右ランチャーから発射）
+					if ( weaponEnergy < 10)
+						break;
 					if (bulletFlag == false)
 					{
 						bulletFlag = true;
@@ -139,9 +140,9 @@ public class MyRobotController : MonoBehaviour {
 					}
 					break;
 				case 1:
-					if (weaponEnergy < 100)
-						break;
 					// ミサイル（左ランチャーから発射）
+					if ( weaponEnergy < 100)
+						break;
 					if (bulletFlag == false)
 					{
 						bulletFlag = true;
@@ -152,9 +153,9 @@ public class MyRobotController : MonoBehaviour {
 					}
 					break;
 				case 2:
-					if (weaponEnergy < 1)
-						break;
 					// 機関銃（連射OK、胴体中心から、左右交互に発射）
+					if ( weaponEnergy < 1)
+						break;
 					if (mgCount == 0.0f)
 					{
 						GameObject weapon3 = Instantiate(weapon3Prefab) as GameObject;
@@ -175,7 +176,6 @@ public class MyRobotController : MonoBehaviour {
 					break;
 			}
 			weaponEnergyText.GetComponent<Text>().text = "W.E " + weaponEnergy;    // 兵器エネルギー
-
 		}
 		else {
 			bulletFlag = false;

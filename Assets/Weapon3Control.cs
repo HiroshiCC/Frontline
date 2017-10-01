@@ -13,7 +13,8 @@ public class Weapon3Control : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Start () {
+	void Start ()
+	{
 		myRigidbody = GetComponent<Rigidbody>();
 		myRigidbody.velocity = transform.forward * 100.0f;
 
@@ -31,7 +32,8 @@ public class Weapon3Control : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Update () {
+	void Update ()
+	{
 		
 	}
 
@@ -51,6 +53,9 @@ public class Weapon3Control : MonoBehaviour {
 		else if (other.gameObject.tag == "tagGROUND")
 		{
 			Destroy(gameObject);
+			// 地面に外れた時のパーティクルオブジェクトを生成する
+			//GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
+			//explosion.transform.position = transform.position;
 		}
 	}
 
@@ -62,11 +67,7 @@ public class Weapon3Control : MonoBehaviour {
 	//******************************************************************************************
 	void OnTriggerEnter( Collider other )
 	{
-		if ( other.gameObject.tag == "tagGROUND" )
-		{
-			Destroy( gameObject );
-		}
-		else if ( other.gameObject.tag == "tagEnemyS" )
+		if ( other.gameObject.tag == "tagEnemyS" )
 		{
 			Destroy( gameObject );
 		}
