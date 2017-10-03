@@ -38,8 +38,8 @@ public class Weapon1Controller : MonoBehaviour
 
 		myRigidbody.velocity = transform.forward * 140.0f;
 
-		// 発射後 0.75秒で消す
-		Destroy( gameObject, 0.75f );
+		// 発射後 1秒で消す
+		Destroy( gameObject, 1f );
 	}
 
 	//******************************************************************************************

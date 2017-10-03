@@ -27,7 +27,7 @@ public class Weapon2Control : MonoBehaviour {
 		sound.Play();
 
 		// 発射後 4秒で消す
-		Destroy( gameObject, 4.0f);
+		Destroy( gameObject, 6.0f);
 	}
 
 	//******************************************************************************************

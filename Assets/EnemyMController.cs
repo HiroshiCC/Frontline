@@ -8,6 +8,7 @@ public class EnemyMController : MonoBehaviour {
 	public GameObject ExplosionPrefab;
 	public Transform target;
 	NavMeshAgent agent;
+	GameObject TargetPos;
 
 	//******************************************************************************************
 	//	Start
@@ -15,7 +16,8 @@ public class EnemyMController : MonoBehaviour {
 	// [戻り値]
 	// [コメント]
 	//******************************************************************************************
-	void Start () {
+	void Start ()
+	{
 		agent = GetComponent<NavMeshAgent>();
 	}
 
@@ -27,7 +29,7 @@ public class EnemyMController : MonoBehaviour {
 	//******************************************************************************************
 	void Update()
 	{
-		agent.SetDestination( target.position );
+		agent.SetDestination( TargetPos.transform.position );
 
 		//agent.SetDestination( new Vector3( 100.0f, 0.0f, 100.0f ) );
 		// 姿勢が、地面の角度に沿うようにしようと思った。
@@ -39,30 +41,12 @@ public class EnemyMController : MonoBehaviour {
 	}
 
 	//******************************************************************************************
-	//	OnCollisionEnter
+	//	OnTriggerEnter
 	// [引数]
 	// [戻り値]
 	// [コメント]
-	//	Stage1では、このキャラは出てこない
 	//******************************************************************************************
-	//void OnCollisionEnter( Collision other )
-		//{
-		//	if ( (other.gameObject.tag == "tagCANON") || (other.gameObject.tag == "tagMISSILE") || (other.gameObject.tag == "tagMACHINEGUN") )
-		//	{
-		//		Destroy( gameObject );
-		//		// 爆発のassetを実行
-		//		GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
-		//		explosion.transform.position = transform.position;
-		//	}
-		//}
-	
-		//******************************************************************************************
-		//	OnTriggerEnter
-		// [引数]
-		// [戻り値]
-		// [コメント]
-		//******************************************************************************************
-		void OnTriggerEnter( Collider other )
+	void OnTriggerEnter( Collider other )
 	{
 		if ( (other.gameObject.tag == "tagCANON") || (other.gameObject.tag == "tagMISSILE") || (other.gameObject.tag == "tagMACHINEGUN") )
 		{
@@ -71,5 +55,17 @@ public class EnemyMController : MonoBehaviour {
 			GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
 			explosion.transform.position = transform.position;
 		}
+	}
+
+	//******************************************************************************************
+	//	目的地をセットする
+	// [引数]
+	//	GameObject Obj		: 目的値となるオブジェクト	
+	// [戻り値]
+	// [コメント]
+	//******************************************************************************************
+	public void SetTargetPos( GameObject Obj )
+	{
+		TargetPos = Obj;
 	}
 }

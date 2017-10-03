@@ -28,6 +28,9 @@ public class MyRobotController : MonoBehaviour {
 	private float mgCount = 0.0f;
 	private string[] weaponName;
 	private int weaponEnergy;
+	private float walkAngle = 0.0f;
+	private GameObject cockpitPanel;
+
 	// UIテキスト関連
 	private GameObject weaponNameText;
 	private GameObject weaponEnergyText;
@@ -41,7 +44,7 @@ public class MyRobotController : MonoBehaviour {
 	void Start ()
 	{
 
-		weaponEnergy = 100000;
+		weaponEnergy = 5000 ;
 
 		weaponName = new []{ "GUN", "MSL", "M/G" };
 		myRigidbody = GetComponent<Rigidbody>();
@@ -53,6 +56,7 @@ public class MyRobotController : MonoBehaviour {
 		myCamera = GameObject.Find("Main Camera");
 		weaponNameText = GameObject.Find("WeaponNameText");
 		weaponEnergyText = GameObject.Find("WeaponEnergyText");
+		cockpitPanel = GameObject.Find( "Panel_center_low" );
 
 		// 画面の初期化
 		weaponNameText.GetComponent<Text>().text = weaponName[kindOfWeapon];    // 兵器名
@@ -79,8 +83,28 @@ public class MyRobotController : MonoBehaviour {
 		else if (speed == RUN)
 			hdgSpeed = 30.0f;
 
+		// コックピットを揺らす
+		if ( speed == 0.0f )
+		{
+
+		}
+		else if ( speed == WALK )
+		{
+			//cockpitPanel.GetComponent<RectTransform>().position.x=
+			//cockpitPanel.transform.positionn.x;
+			//cockpitPanel.transform.position.y;
+			//cockpitPanel.transform.position.x = Mathf.Sin( 3.1415f / 360.0f * Time.deltaTime ) * 20f;
+			//cockpitPanel.transform.position.y = Mathf.Cos( 3.1415f / 360.0f * Time.deltaTime ) * 20f;
+			//if ( cockpitPanel.transform.position.y < 0.0f )
+			//	cockpitPanel.transform.position.y *= -1.0f;
+		}
+		else if ( speed == RUN )
+		{
+
+		}
+
 		// 左に向く
-		if (Input.GetKey(KeyCode.LeftArrow))
+		if ( Input.GetKey(KeyCode.LeftArrow))
 			transform.Rotate(0, -hdgSpeed * Time.deltaTime, 0);
 
 		// 右に向く
@@ -106,6 +130,7 @@ public class MyRobotController : MonoBehaviour {
 		else
 			myRigidbody.velocity = new Vector3(0, 0, 0);        // 停止																
 		myRigidbody.velocity += v;								// 縦方向の速度を復元する
+
 
 		// 武器選択（チャタリング防止）
 		if (Input.GetKey(KeyCode.C)) {

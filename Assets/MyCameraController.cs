@@ -26,7 +26,6 @@ public class MyCameraController : MonoBehaviour
 	//******************************************************************************************
 	void Update()
 	{
-
 		// カメラのみ、上を向く
 		if ( Input.GetKey( KeyCode.DownArrow ) )
 		{

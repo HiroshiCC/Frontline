@@ -8,6 +8,7 @@ public class EnemyLController : MonoBehaviour {
 	public GameObject ExplosionPrefab;  // 爆発
 	public Transform target;
 	NavMeshAgent agent;
+	GameObject TargetPos;
 
 	//******************************************************************************************
 	//	Start
@@ -18,8 +19,6 @@ public class EnemyLController : MonoBehaviour {
 	void Start ()
 	{
 		agent = GetComponent<NavMeshAgent>();
-
-		target.transform.Translate( 0.0f, 0.0f, 0.0f );
 	}
 
 	//******************************************************************************************
@@ -30,26 +29,8 @@ public class EnemyLController : MonoBehaviour {
 	//******************************************************************************************
 	void Update ()
 	{
-		agent.SetDestination( target.position );
+		agent.SetDestination( TargetPos.transform.position );
 	}
-
-	//******************************************************************************************
-	//	OnCollisionEnter
-	// [引数]
-	// [戻り値]
-	// [コメント]
-	//	Stage1では、このキャラは出てこない
-	//******************************************************************************************
-	//void OnCollisionEnter( Collision other )
-	//{
-	//	if ( (other.gameObject.tag == "tagCANON") || (other.gameObject.tag == "tagMISSILE") || (other.gameObject.tag == "tagMACHINEGUN") )
-	//	{
-	//		Destroy( gameObject );
-	//		// 爆発のassetを実行
-	//		GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
-	//		explosion.transform.position = transform.position;
-	//	}
-	//}
 
 	//******************************************************************************************
 	//	OnCollisionEnter
@@ -66,5 +47,17 @@ public class EnemyLController : MonoBehaviour {
 			GameObject explosion = Instantiate(ExplosionPrefab) as GameObject;
 			explosion.transform.position = transform.position;
 		}
+	}
+
+	//******************************************************************************************
+	//	目的地をセットする
+	// [引数]
+	//	GameObject Obj		: 目的値となるオブジェクト	
+	// [戻り値]
+	// [コメント]
+	//******************************************************************************************
+	public void SetTargetPos( GameObject Obj )
+	{
+		TargetPos = Obj;
 	}
 }
