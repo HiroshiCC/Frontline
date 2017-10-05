@@ -28,12 +28,13 @@ public class MyRobotController : MonoBehaviour {
 	private float mgCount = 0.0f;
 	private string[] weaponName;
 	private int weaponEnergy;
-	private float walkAngle = 0.0f;
-	private GameObject cockpitPanel;
+	//private float walkAngle = 0.0f;
+	//private GameObject cockpitPanel;
 
 	// UIテキスト関連
 	private GameObject weaponNameText;
 	private GameObject weaponEnergyText;
+	private GameObject messageText;
 
 	//******************************************************************************************
 	//	Start
@@ -56,7 +57,8 @@ public class MyRobotController : MonoBehaviour {
 		myCamera = GameObject.Find("Main Camera");
 		weaponNameText = GameObject.Find("WeaponNameText");
 		weaponEnergyText = GameObject.Find("WeaponEnergyText");
-		cockpitPanel = GameObject.Find( "Panel_center_low" );
+		//cockpitPanel = GameObject.Find( "Panel_center_low" );
+		messageText = GameObject.Find( "MsgText" );
 
 		// 画面の初期化
 		weaponNameText.GetComponent<Text>().text = weaponName[kindOfWeapon];    // 兵器名
@@ -112,10 +114,12 @@ public class MyRobotController : MonoBehaviour {
 			transform.Rotate(0, hdgSpeed * Time.deltaTime, 0);
 
 		// 速度の設定
-		if (Input.GetKey(KeyCode.S))
+		if ( Input.GetKey( KeyCode.S ) )
 			speed = RUN;                    // 走る
-		else if (Input.GetKey(KeyCode.X))
+		else if ( Input.GetKey( KeyCode.X ) )
 			speed = WALK;                   // 歩く
+		else
+			speed = 0.0f;
 
 		// 縦方向の速度を保持する
 		Vector3 v = myRigidbody.velocity;
@@ -206,5 +210,20 @@ public class MyRobotController : MonoBehaviour {
 			bulletFlag = false;
 			mgCount = 0.0f ;
 		}
+	}
+	//******************************************************************************************
+	//	OnTriggerEnter
+	// [引数]
+	// [戻り値]
+	//******************************************************************************************
+	void OnTriggerEnter( Collider other )
+	{
+		// ゴールラインを通過した
+		if ( other.gameObject.tag == "tagGoal" )
+		{
+			messageText.GetComponent<Text>().text = "Goal !!!";
+			GameObject.Find( "GameControl" ).GetComponent<GameController_1st>().Goal();
+		}
+
 	}
 }

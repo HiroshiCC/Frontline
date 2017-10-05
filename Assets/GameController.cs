@@ -96,8 +96,6 @@ public class GameController : MonoBehaviour {
 			posNum = Random.Range( 0, 8 );
 			enemyData[ptr].transform.position = startPos[posNum].transform.position;
 			enemyData[ptr].transform.rotation = startPos[posNum].transform.rotation;
-
-			Debug.Log( "Enemy" );
 		}
 	}
 }
