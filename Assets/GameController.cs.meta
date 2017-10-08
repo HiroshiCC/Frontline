@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: 0f9b331543d56a348910a73d0e0bb69e
-timeCreated: 1506843997
+timeCreated: 1507357492
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - enemySPrefab: {fileID: 1643970854755244, guid: 895dec04a45d1f54682bb526e274a09b,
+      type: 2}
+  - enemyMPrefab: {fileID: 1631020930412450, guid: 794ab88673de5ef41b81fb89f69aa2b6,
+      type: 2}
+  - enemyLPrefab: {fileID: 1269880137028684, guid: a8de2114e3ba5df468f3f12d3fb9382a,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

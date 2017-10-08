@@ -90,7 +90,6 @@ public class Weapon1Controller : MonoBehaviour
 		else if ( other.gameObject.tag == "tagEnemyM" )
 		{
 			Destroy( gameObject );
-			// ここで、相手を爆発させる
 		}
 		else if ( other.gameObject.tag == "tagEnemyL" )
 		{

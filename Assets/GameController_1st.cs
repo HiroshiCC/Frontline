@@ -57,11 +57,11 @@ public class GameController_1st : MonoBehaviour {
 	// [引数]
 	// [戻り値]
 	// [コメント]
+	//	1stステージのみ。MyRobotControllerのOnTriggerEnter()から、呼ばれる。
 	//******************************************************************************************
 	public void Goal()
 	{
-		Debug.Log( "Goal in!" );
-
+		// 時間カウントの停止
 		flag = true;
 	}
 }

@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour {
 			// 発生する敵の種類
 			kindNum = Random.Range( 1, 4 );
 
-			switch ( kindNum)
+			switch ( kindNum )
 			{
 				case 1:
 					enemyData[ptr] = Instantiate(enemySPrefab) as GameObject;
