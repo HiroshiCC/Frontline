@@ -6,11 +6,11 @@ public class Weapon1Controller : MonoBehaviour
 {
 	public GameObject ExplosionPrefab;
 
-	private Rigidbody myRigidbody;
-	private float speed;            // 弾の速さ
-	private float periodOfLive;     // 弾の最大生存期間
-	private AudioSource sound;
-	//private GameObject myCamera;
+	Rigidbody myRigidbody;
+	float speed;            // 弾の速さ
+	float periodOfLive;     // 弾の最大生存期間
+	AudioSource sound;
+	//GameObject myCamera;
 
 	//******************************************************************************************
 	//	Start

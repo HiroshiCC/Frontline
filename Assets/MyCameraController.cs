@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MyCameraController : MonoBehaviour
 {
-	float pitchAngle;		// カメラのピッチ角管理用
+	float pitchAngle;       // カメラのピッチ角管理用
+	bool startFlag;
 
 	//******************************************************************************************
 	//	Start
@@ -14,7 +15,7 @@ public class MyCameraController : MonoBehaviour
 	//******************************************************************************************
 	void Start()
 	{
-
+		startFlag = false;
 	}
 
 	//******************************************************************************************
@@ -26,6 +27,9 @@ public class MyCameraController : MonoBehaviour
 	//******************************************************************************************
 	void Update()
 	{
+		if ( startFlag == false )
+			return;
+
 		// カメラのみ、上を向く
 		if ( Input.GetKey( KeyCode.DownArrow ) )
 		{
@@ -45,6 +49,17 @@ public class MyCameraController : MonoBehaviour
 				pitchAngle += (50.0f * Time.deltaTime);
 			}
 		}
+	}
+
+	//******************************************************************************************
+	//	ゲーム開始を許可する
+	// [引数]
+	// [戻り値]
+	//	1stステージのみ
+	//******************************************************************************************
+	public void StartGame()
+	{
+		startFlag = true;
 	}
 }
 

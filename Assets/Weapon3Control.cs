@@ -22,7 +22,7 @@ public class Weapon3Control : MonoBehaviour {
 		sound = GetComponent<AudioSource>();
 		sound.Play();
 		
-		// 発射後 0.5秒で消す
+		// 発射後 1.0秒で消す
 		Destroy(gameObject, 1.0f);
 	}
 

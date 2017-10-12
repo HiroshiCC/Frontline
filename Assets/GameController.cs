@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
 	private GameObject myRobot;
 
 	float deltaT = 0.0f;
-
+	bool startFlag;
 	//******************************************************************************************
 	//	Start
 	// [引数]
@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		myRobot = GameObject.Find( "MyRobot" );
+		startFlag = false;
 	}
 
 	//******************************************************************************************
@@ -40,6 +41,9 @@ public class GameController : MonoBehaviour {
 	//******************************************************************************************
 	void Update ()
 	{
+		if ( startFlag == false )
+			return;
+	
 		int posNum;
 		int kindNum;
 		int ptr = 0;
@@ -48,11 +52,11 @@ public class GameController : MonoBehaviour {
 		int j;
 
 		deltaT += Time.deltaTime;
-		if ( deltaT < 15.0f )
-			return;	// １５秒経過していない間は、出現させない
+		if ( deltaT < 10.0f )
+			return;	// １０秒ごとに敵を出現させる
 		deltaT = 0.0f;
 
-		for ( i = 0 ; i < 2 ; i++ )
+		for ( i = 0 ; i < 1 ; i++ )
 		{
 			// 敵データの格納先を探す
 			flag = false;
@@ -64,7 +68,6 @@ public class GameController : MonoBehaviour {
 					flag = true;
 					break;
 				}
-
 			}
 			if ( flag == false )
 				return;     // 空きがないので、敵を出現させない
@@ -93,9 +96,21 @@ public class GameController : MonoBehaviour {
 					break;
 			}
 			// 敵発生位置
-			posNum = Random.Range( 0, 8 );
+			//posNum = Random.Range( 0, 8 );
+			posNum = 6;
 			enemyData[ptr].transform.position = startPos[posNum].transform.position;
 			enemyData[ptr].transform.rotation = startPos[posNum].transform.rotation;
 		}
+	}
+
+	//******************************************************************************************
+	//	Update
+	// [引数]
+	// [戻り値]
+	// [コメント]
+	//******************************************************************************************
+	public void StartGame()
+	{
+		startFlag = true;
 	}
 }

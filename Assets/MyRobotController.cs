@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class MyRobotController : MonoBehaviour {
 
@@ -13,7 +14,6 @@ public class MyRobotController : MonoBehaviour {
 	float WALK = 5.0f;			// 歩くスピード
 	float RUN = 15.0f;				// 走るスピード
 	float speed =0.0f;                // 自機の移動速度
-	//int speedMode ;             // 0:stop 1:walk 2:run
 	int speedGear ;				// 0:---  1:walk 2:run
 	Rigidbody myRigidbody;
 	float hdgSpeed;
@@ -30,8 +30,8 @@ public class MyRobotController : MonoBehaviour {
 	float mgCount = 0.0f;
 	string[] weaponName;
 	int weaponEnergy;
-	//private float walkAngle = 0.0f;
 	GameObject cockpitPanel;
+	bool startFlag = false;
 
 	// UIテキスト関連
 	GameObject weaponNameText;
@@ -47,7 +47,6 @@ public class MyRobotController : MonoBehaviour {
 	//******************************************************************************************
 	void Start ()
 	{
-
 		weaponEnergy = 500 ;
 
 		weaponName = new []{ "GUN", "MSL", "M/G" };
@@ -68,7 +67,7 @@ public class MyRobotController : MonoBehaviour {
 		// 画面の初期化
 		weaponNameText.GetComponent<Text>().text = weaponName[kindOfWeapon];    // 兵器名
 		weaponEnergyText.GetComponent<Text>().text = "W.E "+ weaponEnergy ;    // 兵器エネルギー
-
+		messageText.GetComponent<Text>().text = "Start !!!";
 	}
 
 
@@ -80,6 +79,9 @@ public class MyRobotController : MonoBehaviour {
 	//******************************************************************************************
 	void Update()
 	{
+		if ( startFlag == false )
+			return;
+
 		float ry;
 		elipseTime += Time.deltaTime;
 
@@ -152,7 +154,7 @@ public class MyRobotController : MonoBehaviour {
 		else if ( speed == WALK )
 		{
 			Vector3 rect;
-			rect.x = 20.0f * Mathf.Sin( 3.141592f / 180.0f * elipseTime * 180.0f * 1.5f );
+			rect.x = 20.0f * Mathf.Sin( 3.141592f / 180.0f * elipseTime * 180.0f * 1.5f ) - 140.0f;
 			ry = 20.0f * Mathf.Cos( 3.141592f / 180.0f * elipseTime * 180.0f * 1.5f );
 			if ( ry < 0.0f )
 				ry *= -1.0f;
@@ -163,7 +165,7 @@ public class MyRobotController : MonoBehaviour {
 		else if ( speed == RUN )
 		{
 			Vector3 rect;
-			rect.x = 20.0f * Mathf.Sin( 3.141592f / 180.0f * elipseTime * 180.0f * 2.5f ) ;
+			rect.x = 20.0f * Mathf.Sin( 3.141592f / 180.0f * elipseTime * 180.0f * 2.5f ) - 140.0f;
 			ry = 20.0f * Mathf.Cos( 3.141592f / 180.0f * elipseTime * 180.0f * 2.5f );
 			if ( ry < 0.0f )
 				ry *= -1.0f;
@@ -246,7 +248,12 @@ public class MyRobotController : MonoBehaviour {
 			bulletFlag = false;
 			mgCount = 0.0f ;
 		}
+
+		// 残りの弾が0になったらオープニング画面に戻る(2nd Stage)
+		if ( weaponEnergy  == 0 )
+			SceneManager.LoadScene( "Title" );
 	}
+
 	//******************************************************************************************
 	//	OnTriggerEnter
 	// [引数]
@@ -255,12 +262,33 @@ public class MyRobotController : MonoBehaviour {
 	//******************************************************************************************
 	void OnTriggerEnter( Collider other )
 	{
-		// ゴールラインを通過した
+		// ゴールラインを通過した(1st Stage)
 		if ( other.gameObject.tag == "tagGoal" )
 		{
 			messageText.GetComponent<Text>().text = "Goal !!!";
 			GameObject.Find( "GameControl" ).GetComponent<GameController_1st>().Goal();
 		}
+	}
+
+	//******************************************************************************************
+	//	ゲーム開始を許可する
+	// [引数]
+	// [戻り値]
+	//	1stステージのみ
+	//******************************************************************************************
+	public void StartGame()
+	{
+		startFlag = true;
+	}
+
+	public void InputLeftButtonDown()
+	{
+		Debug.Log( "LEFT" );
+	}
+
+	public void InputRightButtonDown()
+	{
+		Debug.Log( "RIGHT" );
 
 	}
 }
