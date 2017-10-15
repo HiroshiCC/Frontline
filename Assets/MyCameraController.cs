@@ -55,11 +55,38 @@ public class MyCameraController : MonoBehaviour
 	//	ゲーム開始を許可する
 	// [引数]
 	// [戻り値]
-	//	1stステージのみ
+	// [コメント]
 	//******************************************************************************************
 	public void StartGame()
 	{
 		startFlag = true;
+	}
+
+	//******************************************************************************************
+	//	ピッチ処理
+	// [引数]
+	// [戻り値]
+	// [コメント]
+	//******************************************************************************************
+	public void SetPitch( float mouseY )
+	{
+		float mY = 50.0f * mouseY * Time.deltaTime;
+
+		//Debug.Log( pitchAngle + "  :  " + mouseY + " : " + mY );
+
+		if ( mY > 0.0f )
+		{
+			if ( (pitchAngle + mY) > 30.0f )
+				mY = 0.0f;
+		}
+		else
+		{
+			if ( (pitchAngle + mY) < -30.0f )
+				mY = 0.0f;
+		}
+
+		pitchAngle += mY;
+		transform.Rotate( new Vector3( mY, 0.0f, 0.0f ) );
 	}
 }
 

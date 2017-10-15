@@ -57,40 +57,40 @@ public class GameController_1st : MonoBehaviour {
 
 			if ( timer < 1.0f )
 			{
-				timePrint.GetComponent<Text>().text = "5";
+				msgText.GetComponent<Text>().text = "5";
 				return;
 			}
 			else if ( timer < 2.0f )
 			{
-				timePrint.GetComponent<Text>().text = "4";
+				msgText.GetComponent<Text>().text = "4";
 				return;
 			}
 			else if ( timer < 3.0f )
 			{
-				timePrint.GetComponent<Text>().text = "3";
+				msgText.GetComponent<Text>().text = "3";
 				return;
 			}
 			else if ( timer < 4.0f )
 			{
-				timePrint.GetComponent<Text>().text = "2";
+				msgText.GetComponent<Text>().text = "2";
 				return;
 			}
 			else if ( timer < 5.0f )
 			{
-				timePrint.GetComponent<Text>().text = "1";
+				msgText.GetComponent<Text>().text = "1";
 				return;
 			}
 			else if ( timer < 6.0f )
 			{
 				msgText.GetComponent<Text>().text = "START !!!";
-				countdownFlag = false;
 				GameObject.Find( "MyRobot" ).GetComponent<MyRobotController>().StartGame();
 				GameObject.Find( "Main Camera" ).GetComponent<MyCameraController>().StartGame();
 				GameObject.Find( "GameControl2" ).GetComponent<GameController>().StartGame();
-				return;
 			}
-			else
-				return;
+			else if ( timer < 7.0f ) {
+				msgText.GetComponent<Text>().text = "";
+				countdownFlag = false;
+			}
 		}
 
 		// ゲーム中のタイムカウント

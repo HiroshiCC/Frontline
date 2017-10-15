@@ -96,8 +96,9 @@ public class GameController : MonoBehaviour {
 					break;
 			}
 			// 敵発生位置
-			//posNum = Random.Range( 0, 8 );
-			posNum = 6;
+			posNum = Random.Range( 0, 8 );
+			//posNum = 6;
+			enemyData[ptr].GetComponent<UnityEngine.AI.NavMeshAgent>().Warp( startPos[posNum].transform.position );
 			enemyData[ptr].transform.position = startPos[posNum].transform.position;
 			enemyData[ptr].transform.rotation = startPos[posNum].transform.rotation;
 		}
