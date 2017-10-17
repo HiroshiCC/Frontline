@@ -44,11 +44,11 @@ public class MyRobotController : MonoBehaviour {
 
 	// スティック操作計算用
 	float offX = 1.0f;
-	float offY = 10.0f;
-	float sizeX = 180.0f;
-	float sizeY = 180.0f;
-	float dX = 15.0f;
-	float dY = 15.0f;
+	float offY = 1.0f;
+	float sizeX = 360.0f;
+	float sizeY = 360.0f;
+	float dX = 30.0f;
+	float dY = 30.0f;
 
 	//******************************************************************************************
 	//	Start
@@ -125,10 +125,13 @@ public class MyRobotController : MonoBehaviour {
 		if ( Input.GetKey( KeyCode.Z ) )
 			DriveMode = -1;     // バックする
 
-		if ( Input.GetKey( KeyCode.Space ) )
-			FireOn();
-		else
-			FireOff();
+		//if ( Input.GetKey( KeyCode.Space ) )
+		//	FireOn();
+		//else
+		//{
+		//	if ( fire == true)
+		//		FireOff();
+		//}
 
 		if ( Input.GetKey( KeyCode.C ) )
 			InputSEL();
@@ -173,7 +176,7 @@ public class MyRobotController : MonoBehaviour {
 		else if ( speed == WALK )
 		{
 			Vector3 rect;
-			rect.x = 20.0f * Mathf.Sin( 3.141592f / 180.0f * elipseTime * 180.0f * 1.5f ) - 140.0f;
+			rect.x = 20.0f * Mathf.Sin( 3.141592f / 180.0f * elipseTime * 180.0f * 1.5f ) - 210.0f;
 			ry = 20.0f * Mathf.Cos( 3.141592f / 180.0f * elipseTime * 180.0f * 1.5f );
 			if ( ry < 0.0f )
 				ry *= -1.0f;
@@ -184,7 +187,7 @@ public class MyRobotController : MonoBehaviour {
 		else if ( speed == RUN )
 		{
 			Vector3 rect;
-			rect.x = 20.0f * Mathf.Sin( 3.141592f / 180.0f * elipseTime * 180.0f * 2.5f ) - 140.0f;
+			rect.x = 20.0f * Mathf.Sin( 3.141592f / 180.0f * elipseTime * 180.0f * 2.5f ) - 210.0f;
 			ry = 20.0f * Mathf.Cos( 3.141592f / 180.0f * elipseTime * 180.0f * 2.5f );
 			if ( ry < 0.0f )
 				ry *= -1.0f;
@@ -411,6 +414,8 @@ public class MyRobotController : MonoBehaviour {
 		// 発砲処理
 		if ( fire == true )
 		{
+			Debug.Log( "Fire!!!" );
+
 			switch ( kindOfWeapon )
 			{
 				case 0:
@@ -501,6 +506,8 @@ public class MyRobotController : MonoBehaviour {
 	public void FireOn()
 	{
 		fire = true;
+
+		Debug.Log( "FireON" );
 	}
 
 	//******************************************************************************************
@@ -511,6 +518,8 @@ public class MyRobotController : MonoBehaviour {
 	public void FireOff()
 	{
 		fire = false;
+
+		Debug.Log( "FireOFF" );
 	}
 }
 
