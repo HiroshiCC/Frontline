@@ -123,7 +123,15 @@ public class MyRobotController : MonoBehaviour {
 			DriveMode = 0;		// 停止する
 
 		if ( Input.GetKey( KeyCode.Z ) )
-			DriveMode = -1;		// バックする
+			DriveMode = -1;     // バックする
+
+		if ( Input.GetKey( KeyCode.Space ) )
+			FireOn();
+		else
+			FireOff();
+
+		if ( Input.GetKey( KeyCode.C ) )
+			InputSEL();
 
 		// 縦方向の速度を保持する
 		Vector3 v = myRigidbody.velocity;

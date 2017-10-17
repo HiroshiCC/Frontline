@@ -13,7 +13,7 @@ public class GameController_1st : MonoBehaviour {
 	GameObject msgText;
 	bool flag;
 	float timer;
-	bool countdownFlag=true;
+	bool countdownFlag = true;
 
 	//******************************************************************************************
 	//	Start
@@ -38,17 +38,6 @@ public class GameController_1st : MonoBehaviour {
 	//******************************************************************************************
 	void Update ()
 	{
-		// ゲーム終了後の時間の確保
-		if ( flag == true )
-		{
-			timer += Time.deltaTime;
-			if ( timer > 5.0f )
-			{
-				// タイトル画面に戻る
-				SceneManager.LoadScene( "Title" );
-			}
-			return;
-		}
 
 		// スタートのカウントダウン
 		if ( countdownFlag == true )
@@ -86,12 +75,16 @@ public class GameController_1st : MonoBehaviour {
 				GameObject.Find( "MyRobot" ).GetComponent<MyRobotController>().StartGame();
 				GameObject.Find( "Main Camera" ).GetComponent<MyCameraController>().StartGame();
 				GameObject.Find( "GameControl2" ).GetComponent<GameController>().StartGame();
+				//return;
 			}
-			else if ( timer < 7.0f ) {
+			else if ( timer < 7.0f )
+			{
 				msgText.GetComponent<Text>().text = "";
 				countdownFlag = false;
 			}
 		}
+
+		//Debug.Break();
 
 		// ゲーム中のタイムカウント
 		if ( flag == false )
@@ -109,6 +102,18 @@ public class GameController_1st : MonoBehaviour {
 			}
 			// タイムの表示更新
 			timePrint.GetComponent<Text>().text = minute + ":" + sec + "." + (int)(elipseTime * 100.0f);
+		}
+
+		// ゲーム終了後の時間の確保
+		if ( flag == true )
+		{
+			timer += Time.deltaTime;
+			if ( timer > 3.0f )
+			{
+				// タイトル画面に戻る
+				SceneManager.LoadScene( "Title" );
+			}
+			return;
 		}
 	}
 
