@@ -98,9 +98,9 @@ public class MyRobotController : MonoBehaviour {
 
 		// 移動スピードによって、旋回速度が変わる
 		if ( speed == 0.0f )
-			hdgSpeed = 80.0f;
+			hdgSpeed = 60.0f;
 		else if ( speed == WALK )
-			hdgSpeed = 50.0f;
+			hdgSpeed = 40.0f;
 		else if ( speed == RUN )
 			hdgSpeed = 30.0f;
 
@@ -209,6 +209,68 @@ public class MyRobotController : MonoBehaviour {
 		}
 		else
 			selectFlag = false;
+
+		// 発砲処理
+		if ( fire == true )
+		{
+			switch ( kindOfWeapon )
+			{
+				case 0:
+					// キャノン砲（右ランチャーから発射）
+					if ( weaponEnergy < 5 )
+						break;
+					if ( bulletFlag == false )
+					{
+						bulletFlag = true;
+						GameObject weapon1 = Instantiate(weapon1Prefab) as GameObject;
+						weapon1.transform.position = launcherR.transform.position;
+						weapon1.transform.rotation = myCamera.transform.rotation;
+						weaponEnergy -= 5;      // 発射にW.Eが5を消費
+					}
+					break;
+				case 1:
+					// ミサイル（左ランチャーから発射）
+					if ( weaponEnergy < 15 )
+						break;
+					if ( bulletFlag == false )
+					{
+						bulletFlag = true;
+						GameObject weapon2 = Instantiate(weapon2Prefab) as GameObject;
+						weapon2.transform.position = launcherL.transform.position;
+						weapon2.transform.rotation = myCamera.transform.rotation;
+						weaponEnergy -= 15;    // 発射にW.Eが15を消費
+					}
+					break;
+				case 2:
+					// 機関銃（連射OK、胴体中心から、左右交互に発射）
+					if ( weaponEnergy < 1 )
+						break;
+					if ( mgCount == 0.0f )
+					{
+						GameObject weapon3 = Instantiate(weapon3Prefab) as GameObject;
+						if ( gunSide == 1 )
+							weapon3.transform.position = gunL.transform.position;
+						else if ( gunSide == -1 )
+							weapon3.transform.position = gunR.transform.position;
+						weapon3.transform.rotation = myCamera.transform.rotation;
+						gunSide *= -1;
+						weaponEnergy -= 1;  // 発射にW.Eが1を消費
+					}
+					// 連射は0.15秒に1発
+					mgCount += Time.deltaTime;
+					if ( mgCount > 0.25f )
+						mgCount = 0.0f;
+					break;
+				default:
+					break;
+			}
+			weaponEnergyText.GetComponent<Text>().text = "W.E " + weaponEnergy;    // 兵器エネルギー
+		}
+		else
+		{
+			bulletFlag = false;
+			mgCount = 0.0f;
+		}
 
 		// 残りの弾が0になったら、５秒後にオープニング画面に戻る(2nd Stage)
 		if ( weaponEnergy == 0 )
@@ -330,48 +392,6 @@ public class MyRobotController : MonoBehaviour {
 	}
 
 	//******************************************************************************************
-	//	スティック操作　横方向
-	// [引数]
-	//	float mouseX		: 横の操作量
-	// [戻り値]
-	//	最大値に対する割合(0.0～1.0)
-	//******************************************************************************************
-	private float CalcX( float mouseX )
-	{
-		if ( mouseX > (sizeX / 2.0f + dX) )
-			mouseX = mouseX - (sizeX / 2.0f + dX);
-		else if ( mouseX > (sizeX / 2.0f - dX) )
-			mouseX = 0.0f;
-		else if ( mouseX <= sizeX / 2.0f - dX )
-			mouseX = mouseX - (sizeX / 2.0f - dX);
-
-		mouseX = mouseX / (sizeX / 2.0f - dX);
-
-		return mouseX;
-	}
-
-	//******************************************************************************************
-	//	スティック操作　縦方向
-	// [引数]
-	//	float mouseX		: 縦の操作量
-	// [戻り値]
-	//	最大値に対する割合(0.0～1.0)
-	//******************************************************************************************
-	private float CalcY( float mouseY )
-	{
-		if ( mouseY > (sizeY / 2.0f + dY) )
-			mouseY = mouseY - (sizeY / 2.0f + dY);
-		else if ( mouseY > (sizeY / 2.0f - dY) )
-			mouseY = 0.0f;
-		else if ( mouseY <= sizeY / 2.0f - dY )
-			mouseY = mouseY - (sizeY / 2.0f - dY);
-
-		mouseY = mouseY / (sizeY / 2.0f - dY);
-
-		return mouseY;
-	}
-
-	//******************************************************************************************
 	//	スティック操作　操作終了
 	// [引数]
 	// [戻り値]
@@ -411,69 +431,69 @@ public class MyRobotController : MonoBehaviour {
 		if ( startFlag == false )
 			return;
 
-		// 発砲処理
-		if ( fire == true )
-		{
-			Debug.Log( "Fire!!!" );
+		//// 発砲処理
+		//if ( fire == true )
+		//{
+		//	Debug.Log( "Fire!!!" );
 
-			switch ( kindOfWeapon )
-			{
-				case 0:
-					// キャノン砲（右ランチャーから発射）
-					if ( weaponEnergy < 5 )
-						break;
-					if ( bulletFlag == false )
-					{
-						bulletFlag = true;
-						GameObject weapon1 = Instantiate(weapon1Prefab) as GameObject;
-						weapon1.transform.position = launcherR.transform.position;
-						weapon1.transform.rotation = myCamera.transform.rotation;
-						weaponEnergy -= 5;      // 発射にW.Eが5を消費
-					}
-					break;
-				case 1:
-					// ミサイル（左ランチャーから発射）
-					if ( weaponEnergy < 15 )
-						break;
-					if ( bulletFlag == false )
-					{
-						bulletFlag = true;
-						GameObject weapon2 = Instantiate(weapon2Prefab) as GameObject;
-						weapon2.transform.position = launcherL.transform.position;
-						weapon2.transform.rotation = myCamera.transform.rotation;
-						weaponEnergy -= 15;    // 発射にW.Eが15を消費
-					}
-					break;
-				case 2:
-					// 機関銃（連射OK、胴体中心から、左右交互に発射）
-					if ( weaponEnergy < 1 )
-						break;
-					if ( mgCount == 0.0f )
-					{
-						GameObject weapon3 = Instantiate(weapon3Prefab) as GameObject;
-						if ( gunSide == 1 )
-							weapon3.transform.position = gunL.transform.position;
-						else if ( gunSide == -1 )
-							weapon3.transform.position = gunR.transform.position;
-						weapon3.transform.rotation = myCamera.transform.rotation;
-						gunSide *= -1;
-						weaponEnergy -= 1;  // 発射にW.Eが1を消費
-					}
-					// 連射は0.15秒に1発
-					mgCount += Time.deltaTime;
-					if ( mgCount > 0.25f )
-						mgCount = 0.0f;
-					break;
-				default:
-					break;
-			}
-			weaponEnergyText.GetComponent<Text>().text = "W.E " + weaponEnergy;    // 兵器エネルギー
-		}
-		else
-		{
-			bulletFlag = false;
-			mgCount = 0.0f;
-		}
+		//	switch ( kindOfWeapon )
+		//	{
+		//		case 0:
+		//			// キャノン砲（右ランチャーから発射）
+		//			if ( weaponEnergy < 5 )
+		//				break;
+		//			if ( bulletFlag == false )
+		//			{
+		//				bulletFlag = true;
+		//				GameObject weapon1 = Instantiate(weapon1Prefab) as GameObject;
+		//				weapon1.transform.position = launcherR.transform.position;
+		//				weapon1.transform.rotation = myCamera.transform.rotation;
+		//				weaponEnergy -= 5;      // 発射にW.Eが5を消費
+		//			}
+		//			break;
+		//		case 1:
+		//			// ミサイル（左ランチャーから発射）
+		//			if ( weaponEnergy < 15 )
+		//				break;
+		//			if ( bulletFlag == false )
+		//			{
+		//				bulletFlag = true;
+		//				GameObject weapon2 = Instantiate(weapon2Prefab) as GameObject;
+		//				weapon2.transform.position = launcherL.transform.position;
+		//				weapon2.transform.rotation = myCamera.transform.rotation;
+		//				weaponEnergy -= 15;    // 発射にW.Eが15を消費
+		//			}
+		//			break;
+		//		case 2:
+		//			// 機関銃（連射OK、胴体中心から、左右交互に発射）
+		//			if ( weaponEnergy < 1 )
+		//				break;
+		//			if ( mgCount == 0.0f )
+		//			{
+		//				GameObject weapon3 = Instantiate(weapon3Prefab) as GameObject;
+		//				if ( gunSide == 1 )
+		//					weapon3.transform.position = gunL.transform.position;
+		//				else if ( gunSide == -1 )
+		//					weapon3.transform.position = gunR.transform.position;
+		//				weapon3.transform.rotation = myCamera.transform.rotation;
+		//				gunSide *= -1;
+		//				weaponEnergy -= 1;  // 発射にW.Eが1を消費
+		//			}
+		//			// 連射は0.15秒に1発
+		//			mgCount += Time.deltaTime;
+		//			if ( mgCount > 0.25f )
+		//				mgCount = 0.0f;
+		//			break;
+		//		default:
+		//			break;
+		//	}
+		//	weaponEnergyText.GetComponent<Text>().text = "W.E " + weaponEnergy;    // 兵器エネルギー
+		//}
+		//else
+		//{
+		//	bulletFlag = false;
+		//	mgCount = 0.0f;
+		//}
 
 		// スティック処理
 		if ( dragFlag == true )
@@ -483,9 +503,9 @@ public class MyRobotController : MonoBehaviour {
 
 			// 移動スピードによって、旋回速度が変わる
 			if ( speed == 0.0f )
-				hdgSpeed = 80.0f;
+				hdgSpeed = 60.0f;
 			else if ( speed == WALK )
-				hdgSpeed = 50.0f;
+				hdgSpeed = 40.0f;
 			else if ( speed == RUN )
 				hdgSpeed = 30.0f;
 
@@ -494,8 +514,83 @@ public class MyRobotController : MonoBehaviour {
 
 			mouseX = CalcX( mouseX );
 			transform.Rotate( 0, hdgSpeed * mouseX * Time.deltaTime, 0 );
-
 		}
+	}
+
+	//******************************************************************************************
+	//	スティック操作　横方向
+	// [引数]
+	//	float mouseX		: 横の操作量
+	// [戻り値]
+	//	最大値に対する割合(0.0～1.0)
+	//******************************************************************************************
+	private float CalcX( float mouseX )
+	{
+		if ( mouseX > (sizeX / 2.0f + dX) )
+			mouseX = mouseX - (sizeX / 2.0f + dX);
+		else if ( mouseX > (sizeX / 2.0f - dX) )
+			mouseX = 0.0f;
+		else if ( mouseX <= sizeX / 2.0f - dX )
+			mouseX = mouseX - (sizeX / 2.0f - dX);
+
+		mouseX = mouseX / (sizeX / 2.0f - dX);
+
+		return StickTable( mouseX );
+	}
+
+	//******************************************************************************************
+	//	スティック操作　縦方向
+	// [引数]
+	//	float mouseX		: 縦の操作量
+	// [戻り値]
+	//	最大値に対する割合(0.0～1.0)
+	//******************************************************************************************
+	private float CalcY( float mouseY )
+	{
+		if ( mouseY > (sizeY / 2.0f + dY) )
+			mouseY = mouseY - (sizeY / 2.0f + dY);
+		else if ( mouseY > (sizeY / 2.0f - dY) )
+			mouseY = 0.0f;
+		else if ( mouseY <= sizeY / 2.0f - dY )
+			mouseY = mouseY - (sizeY / 2.0f - dY);
+
+		mouseY = mouseY / (sizeY / 2.0f - dY);
+
+		return StickTable( mouseY );
+	}
+
+	//******************************************************************************************
+	//	スティック操作　縦方向
+	// [引数]
+	//	float mouseX		: 縦の操作量(0.0～1.0)
+	// [戻り値]
+	//******************************************************************************************
+	private float StickTable( float mouseVal )
+	{
+		float val = Mathf.Abs( mouseVal );
+		float p1 = 0.3f;
+		float p2 = 0.75f;
+		float v1 = 0.1f;
+		float v2 = 0.3f;
+		float res;
+
+		if ( val < p1 )
+		{
+			res = val * v1 / p1;
+		}
+		else if ( val < p2 )
+		{
+			res = (p2 - p1) * val / (v2 - v1);
+		}
+		else
+		{
+			res = (1.0f - p2) * val / (1.0f - v2);
+		}
+
+		if ( mouseVal < 0.0f )
+			res = -res;
+
+		return res;
 	}
 
 	//******************************************************************************************
@@ -506,8 +601,6 @@ public class MyRobotController : MonoBehaviour {
 	public void FireOn()
 	{
 		fire = true;
-
-		Debug.Log( "FireON" );
 	}
 
 	//******************************************************************************************
@@ -518,8 +611,6 @@ public class MyRobotController : MonoBehaviour {
 	public void FireOff()
 	{
 		fire = false;
-
-		Debug.Log( "FireOFF" );
 	}
 }
 
