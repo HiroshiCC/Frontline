@@ -101,7 +101,8 @@ public class GameController_1st : MonoBehaviour {
 				}
 			}
 			// タイムの表示更新
-			timePrint.GetComponent<Text>().text = minute + ":" + sec + "." + (int)(elipseTime * 100.0f);
+			int msec = (int)(elipseTime*100.0f);
+			timePrint.GetComponent<Text>().text = minute.ToString( "00") + ":" + sec.ToString("00") + "." + msec.ToString("000");
 		}
 
 		// ゲーム終了後の時間の確保

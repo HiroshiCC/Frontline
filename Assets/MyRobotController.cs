@@ -125,13 +125,10 @@ public class MyRobotController : MonoBehaviour {
 		if ( Input.GetKey( KeyCode.Z ) )
 			DriveMode = -1;     // バックする
 
-		//if ( Input.GetKey( KeyCode.Space ) )
-		//	FireOn();
-		//else
-		//{
-		//	if ( fire == true)
-		//		FireOff();
-		//}
+		if ( Input.GetKey( KeyCode.Space ) )
+			fire = true;
+		else
+			fire = false;
 
 		if ( Input.GetKey( KeyCode.C ) )
 			InputSEL();
@@ -166,7 +163,32 @@ public class MyRobotController : MonoBehaviour {
 
 		// 縦方向の速度を復元する
 		myRigidbody.velocity = spd;
-		myRigidbody.velocity += v;              
+		myRigidbody.velocity += v;
+
+		// スティック処理
+		if ( dragFlag == true )
+		{
+			float mouseX;
+			float mouseY;
+
+			for ( int i = 0 ; i < Input.touchCount ; i++ )
+			{
+				mouseX = Input.GetTouch( i ).position.x - offX;
+				mouseY = Input.GetTouch( i ).position.y - offY;
+
+				// タッチされた位置がスティック内かどうか
+				if ( ( 0.0f < mouseX ) && (mouseX < 360.0f ) && ( 0.0 < mouseY ) && (mouseY < 360.0f) )
+				{
+					mouseY = CalcY( mouseY );
+					GameObject.Find( "Main Camera" ).GetComponent<MyCameraController>().SetPitch( mouseY );
+
+					mouseX = CalcX( mouseX );
+					transform.Rotate( 0, hdgSpeed * mouseX * Time.deltaTime, 0 );
+
+					break;
+				}
+			}
+		}
 
 		//コックピットを揺らす
 		if ( speed == 0.0f )
@@ -285,6 +307,7 @@ public class MyRobotController : MonoBehaviour {
 	//	OnTriggerEnter
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//	1stステージのみ
 	//******************************************************************************************
 	void OnTriggerEnter( Collider other )
@@ -301,8 +324,8 @@ public class MyRobotController : MonoBehaviour {
 	//	ゲーム開始を許可する
 	// [引数]
 	// [戻り値]
-	//	1stステージのみ
-	//******************************************************************************************
+	// [コメント]
+		//******************************************************************************************
 	public void StartGame()
 	{
 		startFlag = true;
@@ -313,6 +336,7 @@ public class MyRobotController : MonoBehaviour {
 	//	武器を切り替える
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputSEL()
 	{
@@ -333,6 +357,7 @@ public class MyRobotController : MonoBehaviour {
 	//	走る
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputRUN()
 	{
@@ -346,6 +371,7 @@ public class MyRobotController : MonoBehaviour {
 	//	歩く
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputWALK()
 	{
@@ -359,6 +385,7 @@ public class MyRobotController : MonoBehaviour {
 	//	停止する
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputSTOP()
 	{
@@ -372,6 +399,7 @@ public class MyRobotController : MonoBehaviour {
 	//	バックする
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputBACK()
 	{
@@ -385,16 +413,18 @@ public class MyRobotController : MonoBehaviour {
 	//	スティック操作　開始
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputSTICK_DrugBegin()
 	{
-			dragFlag = true;
+		dragFlag = true;
 	}
 
 	//******************************************************************************************
 	//	スティック操作　操作終了
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputSTICK_DrugEnd()
 	{
@@ -405,6 +435,7 @@ public class MyRobotController : MonoBehaviour {
 	//	スティック操作　スティックエリアから外れた
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputSTICK_Exit()
 	{
@@ -415,6 +446,7 @@ public class MyRobotController : MonoBehaviour {
 	//	スティック操作　スティックエリアに再侵入
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void InputSTICK_Enter()
 	{
@@ -425,96 +457,12 @@ public class MyRobotController : MonoBehaviour {
 	//	OnGUI
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	private void OnGUI()
 	{
-		if ( startFlag == false )
-			return;
-
-		//// 発砲処理
-		//if ( fire == true )
-		//{
-		//	Debug.Log( "Fire!!!" );
-
-		//	switch ( kindOfWeapon )
-		//	{
-		//		case 0:
-		//			// キャノン砲（右ランチャーから発射）
-		//			if ( weaponEnergy < 5 )
-		//				break;
-		//			if ( bulletFlag == false )
-		//			{
-		//				bulletFlag = true;
-		//				GameObject weapon1 = Instantiate(weapon1Prefab) as GameObject;
-		//				weapon1.transform.position = launcherR.transform.position;
-		//				weapon1.transform.rotation = myCamera.transform.rotation;
-		//				weaponEnergy -= 5;      // 発射にW.Eが5を消費
-		//			}
-		//			break;
-		//		case 1:
-		//			// ミサイル（左ランチャーから発射）
-		//			if ( weaponEnergy < 15 )
-		//				break;
-		//			if ( bulletFlag == false )
-		//			{
-		//				bulletFlag = true;
-		//				GameObject weapon2 = Instantiate(weapon2Prefab) as GameObject;
-		//				weapon2.transform.position = launcherL.transform.position;
-		//				weapon2.transform.rotation = myCamera.transform.rotation;
-		//				weaponEnergy -= 15;    // 発射にW.Eが15を消費
-		//			}
-		//			break;
-		//		case 2:
-		//			// 機関銃（連射OK、胴体中心から、左右交互に発射）
-		//			if ( weaponEnergy < 1 )
-		//				break;
-		//			if ( mgCount == 0.0f )
-		//			{
-		//				GameObject weapon3 = Instantiate(weapon3Prefab) as GameObject;
-		//				if ( gunSide == 1 )
-		//					weapon3.transform.position = gunL.transform.position;
-		//				else if ( gunSide == -1 )
-		//					weapon3.transform.position = gunR.transform.position;
-		//				weapon3.transform.rotation = myCamera.transform.rotation;
-		//				gunSide *= -1;
-		//				weaponEnergy -= 1;  // 発射にW.Eが1を消費
-		//			}
-		//			// 連射は0.15秒に1発
-		//			mgCount += Time.deltaTime;
-		//			if ( mgCount > 0.25f )
-		//				mgCount = 0.0f;
-		//			break;
-		//		default:
-		//			break;
-		//	}
-		//	weaponEnergyText.GetComponent<Text>().text = "W.E " + weaponEnergy;    // 兵器エネルギー
-		//}
-		//else
-		//{
-		//	bulletFlag = false;
-		//	mgCount = 0.0f;
-		//}
-
-		// スティック処理
-		if ( dragFlag == true )
-		{
-			float mouseX = Input.mousePosition.x - offX;
-			float mouseY = Input.mousePosition.y - offY;
-
-			// 移動スピードによって、旋回速度が変わる
-			if ( speed == 0.0f )
-				hdgSpeed = 60.0f;
-			else if ( speed == WALK )
-				hdgSpeed = 40.0f;
-			else if ( speed == RUN )
-				hdgSpeed = 30.0f;
-
-			mouseY = CalcY( mouseY );
-			GameObject.Find( "Main Camera" ).GetComponent<MyCameraController>().SetPitch( mouseY );
-
-			mouseX = CalcX( mouseX );
-			transform.Rotate( 0, hdgSpeed * mouseX * Time.deltaTime, 0 );
-		}
+		//if ( startFlag == false )
+		//	return;
 	}
 
 	//******************************************************************************************
@@ -523,6 +471,7 @@ public class MyRobotController : MonoBehaviour {
 	//	float mouseX		: 横の操作量
 	// [戻り値]
 	//	最大値に対する割合(0.0～1.0)
+	// [コメント]
 	//******************************************************************************************
 	private float CalcX( float mouseX )
 	{
@@ -544,6 +493,7 @@ public class MyRobotController : MonoBehaviour {
 	//	float mouseX		: 縦の操作量
 	// [戻り値]
 	//	最大値に対する割合(0.0～1.0)
+	// [コメント]
 	//******************************************************************************************
 	private float CalcY( float mouseY )
 	{
@@ -564,6 +514,9 @@ public class MyRobotController : MonoBehaviour {
 	// [引数]
 	//	float mouseX		: 縦の操作量(0.0～1.0)
 	// [戻り値]
+	// [コメント]
+	//	ターゲットに対し、照準を微調整しやすくするため、
+	//	中心付近は、少なく動くようにする。
 	//******************************************************************************************
 	private float StickTable( float mouseVal )
 	{
@@ -571,21 +524,15 @@ public class MyRobotController : MonoBehaviour {
 		float p1 = 0.3f;
 		float p2 = 0.75f;
 		float v1 = 0.1f;
-		float v2 = 0.3f;
+		float v2 = 0.4f;
 		float res;
 
 		if ( val < p1 )
-		{
 			res = val * v1 / p1;
-		}
 		else if ( val < p2 )
-		{
 			res = (p2 - p1) * val / (v2 - v1);
-		}
 		else
-		{
 			res = (1.0f - p2) * val / (1.0f - v2);
-		}
 
 		if ( mouseVal < 0.0f )
 			res = -res;
@@ -597,6 +544,7 @@ public class MyRobotController : MonoBehaviour {
 	//	FIREボタン　押下
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void FireOn()
 	{
@@ -607,6 +555,7 @@ public class MyRobotController : MonoBehaviour {
 	//	FIREボタン　解放
 	// [引数]
 	// [戻り値]
+	// [コメント]
 	//******************************************************************************************
 	public void FireOff()
 	{
